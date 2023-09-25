@@ -161,7 +161,7 @@ export const renderPage = () => {
     const getRadioIcon = (radio) => {
         return `
             <div class="radio-icon" style="border: 5px solid ${radio.color}">
-                <img src="../medias/images/radio-icons/${radio.icon}.png" class="radio-icon-img" />
+                <img src="./medias/images/radio-icons/${radio.icon}.png" class="radio-icon-img" />
             </div>
         `;
     }
