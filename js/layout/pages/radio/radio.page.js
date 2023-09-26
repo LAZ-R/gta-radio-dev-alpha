@@ -18,6 +18,17 @@ const getPlayPauseButtonIcon = (radio) => {
     return `<img id="playPauseIcon" class="play-pause-icon" src="./medias/images/font-awsome/circle-pause-solid.svg" alt="test" style="filter: ${FILTER.getFilterStringForHexValue(radio.color)}">`
 }
 
+const getLikeButtonIcon = (radio) => {
+    let icon = '';
+    // Ajouter un check si liked de base ou pas
+    //if (radio.isLiked) {
+    //    icon = `<img id="likeIcon" class="like-icon" src="./medias/images/font-awsome/heart-solid.svg" alt="test" style="filter: ${FILTER.getFilterStringForHexValue(radio.color)}">`
+    //} else {
+        icon = `<img id="likeIcon" class="like-icon" src="./medias/images/font-awsome/heart-regular.svg" alt="unliked" style="filter: ${FILTER.getFilterStringForHexValue('#878787')}">`
+    //}
+    return icon; 
+}
+
 // BACKGROUND ANIMATION -------------------------------------------------------
 
 const animateBackground = (game, isFirstTime, oldRnd) => {
@@ -152,6 +163,22 @@ const playPause = () => {
 }
 window.playPause = playPause;
 
+const onLikeClick = (radioColor) => {
+    const likeIcon = document.getElementById('likeIcon');
+    if (likeIcon.getAttribute('alt') == 'unliked') { // Changer le check
+        likeIcon.setAttribute('src', './medias/images/font-awsome/heart-solid.svg');
+        likeIcon.setAttribute('alt', 'liked');
+        likeIcon.setAttribute('style', `filter: ${FILTER.getFilterStringForHexValue(radioColor)}`);
+        // ajouter la suppression
+    } else {
+        likeIcon.setAttribute('src', './medias/images/font-awsome/heart-regular.svg');
+        likeIcon.setAttribute('alt', 'unliked');
+        likeIcon.setAttribute('style', `filter: ${FILTER.getFilterStringForHexValue('#878787')}`);
+        // ajouter l'ajout
+    }
+}
+window.onLikeClick = onLikeClick;
+
 // RENDERING ------------------------------------------------------------------
 
 export const renderPage = () => {
@@ -218,9 +245,9 @@ export const renderPage = () => {
             </div>
         </div>
         <div class="radio-controls-container">
-            <button class="music-control-button">Like</button>
+            <button class="music-control-button radio-like-button" onclick="onLikeClick('${radio.color}')">${getLikeButtonIcon(radio)}</button>
             <button class="music-control-button play-pause-button" onclick="playPause()">${getPlayPauseButtonIcon(radio)}</button>
-            <button class="music-control-button">Playlist</button>
+            <button class="music-control-button playlist-button">Playlist</button>
         </div>
     `);
 
