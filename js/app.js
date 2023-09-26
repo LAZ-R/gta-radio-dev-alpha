@@ -19,7 +19,7 @@ const renderAppHome = () => {
 await renderLayout();
 
 if (LAZR.STORAGE.getUserSetting('menuMusic').isActive) {
-    music.play();
+    //music.play();
 }
 
 if (window.location.hash.length == 0) {
